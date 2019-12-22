@@ -1,0 +1,16 @@
+filebeat:
+  inputs:
+    -
+      paths:
+        - /var/log/apps/*.log
+      input_type: log
+      ## NOTE: match go-log-targets logger: https://github.com/palette-software/go-log-targets
+      ##  Lines can start with /^(DEBUG|INFO|WARNING|ERROR|FATAL):/
+      ##  It works until other printed lines in the log file do not start with these characters
+      multiline.pattern: '^[DIWEF]'
+      multiline.negate: true
+      multiline.match: after
+
+output:
+  logstash:
+    hosts: ["logstash:5044"]

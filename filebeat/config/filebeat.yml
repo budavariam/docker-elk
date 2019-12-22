@@ -4,6 +4,9 @@ filebeat:
       paths:
         - /var/log/apps/*.log
       input_type: log
+      multiline.pattern: '^[DIWEF]'
+      multiline.negate: true
+      multiline.match: after
 
 output:
   logstash:

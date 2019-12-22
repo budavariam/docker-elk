@@ -22,10 +22,23 @@ services:
       mode: replicated
       replicas: 1
 
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:7.5.0
+    configs:
+      - source: filebeat_config
+        target: /usr/share/filebeat/filebeat.yml
+    # TODO: how to add logs? are there any not immutable volumes?
+    networks:
+      - elk
+    deploy:
+      mode: replicated
+      replicas: 1
+
   logstash:
     image: docker.elastic.co/logstash/logstash:7.5.0
     ports:
       - "5000:5000"
+      - "5044:5044"
       - "9600:9600"
     configs:
       - source: logstash_config
@@ -57,6 +70,8 @@ configs:
 
   elastic_config:
     file: ./elasticsearch/config/elasticsearch.yml
+  filebeat_config:
+    file: ./filebeat/config/filebeat.yml
   logstash_config:
     file: ./logstash/config/logstash.yml
   logstash_pipeline:

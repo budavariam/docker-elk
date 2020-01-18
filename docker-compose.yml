@@ -41,7 +41,7 @@ services:
         target: /usr/share/logstash/pipeline
         read_only: true
     ports:
-      - "5000:5000"
+      - "5001:5000"
       - "5044:5044"
       - "9600:9600"
     environment:
@@ -67,22 +67,6 @@ services:
       - elk
     depends_on:
       - elasticsearch
-
-  filebeat:
-    build:
-      context: filebeat/
-      args:
-        ELK_VERSION: $ELK_VERSION
-    volumes:
-      - type: bind
-        source: ./filebeat/config/filebeat.yml
-        target: /usr/share/filebeat/filebeat.yml
-        read_only: true
-      - ./logs:/var/log/apps
-    networks:
-      - elk
-    depends_on:
-      - logstash
 
 networks:
   elk:

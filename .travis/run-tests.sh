@@ -85,7 +85,7 @@ if [[ $count -ne 1 ]]; then
 fi
 
 log 'Sending message to Logstash TCP input'
-echo 'dockerelk' | nc localhost 5000
+echo 'dockerelk' | nc localhost 5001
 
 sleep 1
 curl -X POST 'http://localhost:9200/_refresh' -u elastic:changeme \

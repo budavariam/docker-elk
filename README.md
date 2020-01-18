@@ -25,35 +25,38 @@ Other available stack variants:
 
 ## Contents
 
-1. [Requirements](#requirements)
-   * [Host setup](#host-setup)
-   * [SELinux](#selinux)
-   * [Docker for Desktop](#docker-for-desktop)
-     * [Windows](#windows)
-     * [macOS](#macos)
-2. [Usage](#usage)
-   * [Bringing up the stack](#bringing-up-the-stack)
-   * [Cleanup](#cleanup)
-   * [Initial setup](#initial-setup)
-     * [Setting up user authentication](#setting-up-user-authentication)
-     * [Injecting data](#injecting-data)
-     * [Default Kibana index pattern creation](#default-kibana-index-pattern-creation)
-3. [Configuration](#configuration)
-   * [How to configure Elasticsearch](#how-to-configure-elasticsearch)
-   * [How to configure Kibana](#how-to-configure-kibana)
-   * [How to configure Logstash](#how-to-configure-logstash)
-   * [How to disable paid features](#how-to-disable-paid-features)
-   * [How to scale out the Elasticsearch cluster](#how-to-scale-out-the-elasticsearch-cluster)
-4. [Extensibility](#extensibility)
-   * [How to add plugins](#how-to-add-plugins)
-   * [How to enable the provided extensions](#how-to-enable-the-provided-extensions)
-5. [JVM tuning](#jvm-tuning)
-   * [How to specify the amount of memory used by a service](#how-to-specify-the-amount-of-memory-used-by-a-service)
-   * [How to enable a remote JMX connection to a service](#how-to-enable-a-remote-jmx-connection-to-a-service)
-6. [Going further](#going-further)
-   * [Using a newer stack version](#using-a-newer-stack-version)
-   * [Plugins and integrations](#plugins-and-integrations)
-   * [Swarm mode](#swarm-mode)
+* [Contents](#contents)
+* [Requirements](#requirements)
+  * [Host setup](#host-setup)
+  * [SELinux](#selinux)
+  * [Docker for Desktop](#docker-for-desktop)
+    * [Windows](#windows)
+    * [macOS](#macos)
+* [Usage](#usage)
+  * [Bringing up the stack](#bringing-up-the-stack)
+  * [Cleanup](#cleanup)
+* [Initial setup](#initial-setup)
+  * [Setting up user authentication](#setting-up-user-authentication)
+  * [Injecting data](#injecting-data)
+  * [Default Kibana index pattern creation](#default-kibana-index-pattern-creation)
+    * [Via the Kibana web UI](#via-the-kibana-web-ui)
+    * [On the command line](#on-the-command-line)
+* [Configuration](#configuration)
+  * [How to configure Elasticsearch](#how-to-configure-elasticsearch)
+  * [How to configure Kibana](#how-to-configure-kibana)
+  * [How to configure Logstash](#how-to-configure-logstash)
+  * [How to disable paid features](#how-to-disable-paid-features)
+  * [How to scale out the Elasticsearch cluster](#how-to-scale-out-the-elasticsearch-cluster)
+* [Extensibility](#extensibility)
+  * [How to add plugins](#how-to-add-plugins)
+  * [How to enable the provided extensions](#how-to-enable-the-provided-extensions)
+* [JVM tuning](#jvm-tuning)
+  * [How to specify the amount of memory used by a service](#how-to-specify-the-amount-of-memory-used-by-a-service)
+  * [How to enable a remote JMX connection to a service](#how-to-enable-a-remote-jmx-connection-to-a-service)
+* [Going further](#going-further)
+  * [Using a newer stack version](#using-a-newer-stack-version)
+  * [Plugins and integrations](#plugins-and-integrations)
+  * [Swarm mode](#swarm-mode)
 
 ## Requirements
 
@@ -64,7 +67,7 @@ Other available stack variants:
 * 1.5 GB of RAM
 
 By default, the stack exposes the following ports:
-* 5000: Logstash TCP input
+* 5001: Logstash TCP input
 * 9200: Elasticsearch HTTP
 * 9300: Elasticsearch TCP transport
 * 5601: Kibana
@@ -184,12 +187,12 @@ you to send content via TCP:
 
 ```console
 # Using BSD netcat (Debian, Ubuntu, MacOS system, ...)
-$ cat /path/to/logfile.log | nc -q0 localhost 5000
+$ cat /path/to/logfile.log | nc -q0 localhost 5001
 ```
 
 ```console
 # Using GNU netcat (CentOS, Fedora, MacOS Homebrew, ...)
-$ cat /path/to/logfile.log | nc -c localhost 5000
+$ cat /path/to/logfile.log | nc -c localhost 5001
 ```
 
 You can also load the sample data provided by your Kibana installation.

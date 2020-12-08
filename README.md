@@ -1,5 +1,18 @@
 # Elastic stack (ELK) on Docker
 
+## Quick getting started
+
+- [My blog post about this repo](https://budavariam.github.io/posts/2020/01/18/elk-adventures/)
+
+- Add your logs to `./logs` folder for filebeat
+- Update [filebeat config to fit your needs](./extensions/filebeat-compose/config/filebeat.yml)
+- Run `docker-compose -f docker-compose.yml -f extensions/filebeat-compose/filebeat-compose.yml up`
+- Open [kibana](localhost:5601)
+- Set up index in kibana for `logstash-*`
+- Open `Discover` tab and search for the parts that you're interested in
+
+## Original README
+
 [![Join the chat at https://gitter.im/deviantony/docker-elk](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/deviantony/docker-elk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Elastic Stack version](https://img.shields.io/badge/ELK-7.5.1-blue.svg?style=flat)](https://github.com/deviantony/docker-elk/issues/462)
 [![Build Status](https://api.travis-ci.org/deviantony/docker-elk.svg?branch=master)](https://travis-ci.org/deviantony/docker-elk)
